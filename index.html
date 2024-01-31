@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input" placeholder="Введите отзыв">
+    <button class="btn">Оставить отзыв</button>
+    <ul class="list">
+    <div class="div"></div>
+    <script>
+        const btn = document.querySelector('.btn');
+
+        const div = document.querySelector('.div');
+
+        const input = document.getElementById('input');
+
+        const ul = document.querySelector('.list');
+        const initialData = [
+          {
+            product: 'Apple iPhone 13',
+            reviews: [
+              {
+                id: '1',
+                text: 'Отличный телефон! Батарея держится долго. Посоветую его',
+              },
+              {
+                id: '2',
+                text: 'Камера супер, фото выглядят просто потрясающе. как я раньше без него жил?',
+              },
+            ],
+          },
+          {
+            product: 'Samsung Galaxy Z Fold 3',
+            reviews: [
+              {
+                id: '3',
+                text: 'Интересный дизайн, но дорогой. Жалко конечно',
+              },
+            ],
+          },
+          {
+            product: 'Sony PlayStation 5',
+            reviews: [
+              {
+                id: '4',
+                text: 'Люблю играть на PS5, графика на высоте. Подешевле бы',
+              },
+            ],
+          },
+        ];
+
+      function addToList() {
+        div.textContent = '';
+
+        try {
+          if (input.value === '' || input.value.length < 50 || input.value.length > 500) {
+            throw new Error('Извините, Ваш отзыв не отвечает требованиям.');
+          }
+          const li = document.createElement('li');
+          li.textContent = input.value;
+          ul.appendChild(li);
+          input.value = '';
+        } catch (error) {
+          div.textContent = error.message;
+      }
+    }
+    initialData.forEach(product => {
+          product.reviews.forEach(review => {
+            const li = document.createElement('li');
+            li.textContent = review.text;
+            ul.appendChild(li);
+          });
+        });
+        btn.addEventListener('click', addToList);
+    
+    </script>
+</body>
+</html>
